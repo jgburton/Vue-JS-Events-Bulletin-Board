@@ -2,76 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Vue JS</title>
-  <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <title>Vue Cal</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 
 </head>
 <body>
 
-  <!-- NAV -->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
-      <a class="navbar-brand"><i class="glyphicon glyphicon-bullhorn"></i> Vue</a>
+      <a class="navbar-brand"><i class="glyphicon glyphicon-bullhorn"></i>Vue</a>
     </div>
   </nav>
-
-  <!-- main body of app -->
   <div class="container" id="events">
-
-    <!-- add event form -->
     <div class="col-sm-6">
       <div class="panel panel-default">
         <div class="panel-heading">
-
-          <div class="panel-heading">
-            <h3>Add an Event</h3>
-          </div>
-
-          <div class="panel-body">
-
-            <div class="form-group">
-              <input class="form-control" placeholder="Event Name" v-model="event.name">
-            </div>
-
-            <div class="form-group">
-              <textarea class="form-control" placeholder="Event Description" v-model="event.description"></textarea>
-            </div>
-
-            <div class="form-group">
-              <input type="date" class="form-control" placeholder="Date" v-model="event.date">
-            </div>
-
-            <button class="btn btn-primary" v-on="click: addEvent">Submit</button>
-
-          </div>
-
-          <h3>Add an Event</h3>
+          <h3>Events</h3>
         </div>
         <div class="panel-body">
-
           <div>
-
-          </div>
-        </div>
-
-        <!-- show the events -->
-        <div class="col-sm-6">
-          <div class="list-group">
-
+            <input class="form-control" placeholder="Event Title" v-model="event.title">
+            <textarea class="form-control" placeholder="Details" v-model="event.detail"></textarea>
+            <input type="date" class="form-control" placeholder="date" v-model="event.date">
+            <button class="btn btn-primary" v-on:click="addEvent">Submit</button>
           </div>
         </div>
       </div>
-
-      <!-- JS -->
-      <script src="node_modules/vue/dist/vue.js"></script>
-      <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
-      <script src="app.js"></script>
-
+    </div>
+    <div class="col-sm-4">
+      <div class="list-group">
+        <a href="#" class="list-group-item" v-for="event in events">
+          <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-bullhorn"></i> {{ event.title }}</h4>
+          <h5><i class="glyphicon glyphicon-calendar" v-if="event.date"></i> {{ event.date }}</h5>
+          <p class="list-group-item-text" v-if="event.detail">{{ event.detail }}</p>
+          <button class="btn btn-xs btn-danger" v-on:click="deleteEvent($index)">Delete</button>
+        </a>
+      </div>
     </div>
   </div>
+
 </body>
+<script src="node_modules/vue/dist/vue.min.js"></script>
+<script src="node_modules/vue-resource/dist/vue-resource.min.js"></script>
+<script src="app.js"></script>
 </html>
